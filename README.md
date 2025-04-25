@@ -36,12 +36,3 @@ A responsive weather app built with **React**, **TypeScript**, **Vite**, and **T
 - 🗺️ (Bonus) Map view of the searched city
 
 ---
-
-## ⚙️ Getting Started
-
-### 1. Clone the repo
-
-```bash
-git clone https://github.com/your-username/react-weather-app.git
-cd react-weather-app
-```
