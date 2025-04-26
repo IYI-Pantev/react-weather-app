@@ -24,7 +24,7 @@ const WeatherCard = ({ city }: Props) => {
         }
 
         const result = await response.json();
-        console.log("Fetched result:", result);
+        // console.log("Fetched result:", result);
 
         setTempCelsius(result.main.temp);
         setWeatherDesc(result.weather[0].description);
