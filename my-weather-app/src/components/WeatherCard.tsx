@@ -10,6 +10,7 @@ const API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY;
 const WeatherCard = ({ city }: Props) => {
   const [tempCelsius, setTempCelsius] = useState<number | null>(null);
   const [weatherDesc, setWeatherDesc] = useState<string | null>(null);
+  const [icon, setIcon] = useState<string | null>(null);
   const [coordinates, setCoordinates] = useState<{
     lat: number;
     lon: number;
@@ -17,7 +18,7 @@ const WeatherCard = ({ city }: Props) => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!city || city.toLowerCase() === "telerik") return;
+    if (!city || city.toLowerCase() === "telerik") return; // Don't fetch for empty or Telerik
 
     const getWeatherInfo = async () => {
       try {
@@ -33,10 +34,8 @@ const WeatherCard = ({ city }: Props) => {
 
         setTempCelsius(result.main.temp);
         setWeatherDesc(result.weather[0].description);
-        setCoordinates({
-          lat: result.coord.lat,
-          lon: result.coord.lon,
-        });
+        setIcon(result.weather[0].icon);
+        setCoordinates({ lat: result.coord.lat, lon: result.coord.lon });
         setError(null);
       } catch (error) {
         if (error instanceof Error) {
@@ -51,11 +50,12 @@ const WeatherCard = ({ city }: Props) => {
   }, [city]);
 
   return (
-    <div className="container mt-5">
-      <div className="row">
-        {/* Left side - Weather card */}
-        <div className="col-md-6 mb-4">
+    <div className="container my-5">
+      <div className="row g-4">
+        {/* Weather Card */}
+        <div className="col-md-6">
           <div className="card shadow p-4 h-100">
+            {/* Special funny card for Telerik */}
             {city.toLowerCase() === "telerik" ? (
               <>
                 <h2 className="card-title text-center mb-3 text-success">
@@ -83,19 +83,29 @@ const WeatherCard = ({ city }: Props) => {
                 )}
 
                 {weatherDesc && (
-                  <p className="text-center text-muted text-capitalize">
+                  <p className="text-center text-muted text-capitalize mb-3">
                     {weatherDesc}
                   </p>
+                )}
+
+                {/* Weather Icon BELOW description */}
+                {icon && (
+                  <img
+                    src={`http://openweathermap.org/img/wn/${icon}@2x.png`}
+                    alt="Weather Icon"
+                    className="d-block mx-auto mt-3"
+                    style={{ width: "80px", height: "80px" }}
+                  />
                 )}
               </>
             )}
           </div>
         </div>
 
-        {/* Right side - Map */}
-        <div className="col-md-6 mb-4 d-flex align-items-center justify-content-center">
+        {/* Map */}
+        <div className="col-md-6">
           {coordinates && (
-            <div style={{ width: "100%", height: "300px" }}>
+            <div className="card shadow h-100">
               <MapView
                 lat={coordinates.lat}
                 lon={coordinates.lon}
