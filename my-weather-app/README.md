@@ -6,6 +6,24 @@ Data comes from **OpenWeather API** and **OpenStreetMap** with dynamic updates.
 
 ---
 
+## 📸 Demo Screenshots
+
+### 🖼️ Initial Page (before search)
+
+> Clean landing view with search bar and beautiful mountain background.
+
+![Initial Page](./src/pictures/demo1.png)
+
+---
+
+### 🖼️ After Search (showing city weather + map)
+
+> Weather details, dynamic weather icon, map preview, and 5-day forecast shown below.
+
+![Weather and Map](./src/pictures/demo2.png)
+
+---
+
 ## 🚀 Project Goals
 
 - Practice **modern React** fundamentals (hooks, props, component architecture).
@@ -40,24 +58,6 @@ Data comes from **OpenWeather API** and **OpenStreetMap** with dynamic updates.
 - ✅ Link to GitHub profile in the footer
 - ✅ API key protection with `.env` file
 - ✅ Clean, readable and maintainable code architecture
-
----
-
-## 📸 Demo Screenshots
-
-### 🖼️ Initial Page (before search)
-
-> Clean landing view with search bar and beautiful mountain background.
-
-![Initial Page](./src/pictures/demo1.png)
-
----
-
-### 🖼️ After Search (showing city weather + map)
-
-> Weather details, dynamic weather icon, map preview, and 5-day forecast shown below.
-
-![Weather and Map](./src/pictures/demo2.png)
 
 ---
 
@@ -103,5 +103,13 @@ Made with ❤️ by [Nick Pantev](https://github.com/IYI-Pantev)
 - 🧪 Add unit tests for API fetching
 - 🚀 Deploy on Vercel or Netlify for live demo
 - 📱 Improve mobile map layout (auto-zoom to better levels)
+
+---
+
+# 🌦️ React Weather App
+
+A beautiful and responsive weather app built with **React**, **TypeScript**, **Vite**, and **Bootstrap**.  
+Users can search for any city to view **current weather**, **live map preview**, and a **5-day forecast**.  
+Data comes from **OpenWeather API** and **OpenStreetMap** with dynamic updates.
 
 ---
