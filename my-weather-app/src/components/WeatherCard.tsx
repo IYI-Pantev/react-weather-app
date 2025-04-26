@@ -1,14 +1,19 @@
 import { useState, useEffect } from "react";
 
+interface Props {
+  city: string;
+}
+
 const API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY;
 
-const WeatherCard = () => {
-  const [degreesCelsius, setDegreesCelsius] = useState<number | null>(null);
+const WeatherCard = ({ city }: Props) => {
+  const [tempCelsius, setTempCelsius] = useState<number | null>(null);
   const [weatherDesc, setWeatherDesc] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const city = "Sofia";
 
   useEffect(() => {
+    if (!city || city.toLowerCase() === "telerik") return; // don't fetch for empty or Telerik
+
     const getWeatherInfo = async () => {
       try {
         const response = await fetch(
@@ -21,8 +26,9 @@ const WeatherCard = () => {
         const result = await response.json();
         console.log("Fetched result:", result);
 
-        setDegreesCelsius(result.main.temp);
+        setTempCelsius(result.main.temp);
         setWeatherDesc(result.weather[0].description);
+        setError(null);
       } catch (error) {
         if (error instanceof Error) {
           setError(error.message);
@@ -33,15 +39,28 @@ const WeatherCard = () => {
     };
 
     getWeatherInfo();
-  }, []);
+  }, [city]);
 
   return (
     <div className="d-flex justify-content-center mt-5">
       <div
-        className="card shadow-sm p-4"
+        className="card shadow p-4"
         style={{ width: "22rem", minHeight: "18rem" }}
       >
-        {error ? (
+        {/* Special funny card for Telerik */}
+        {city.toLowerCase() === "telerik" ? (
+          <>
+            <h2 className="card-title text-center mb-3 text-success">
+              👨‍💻 Telerik Academy
+            </h2>
+            <p className="text-center fs-5 text-muted">
+              Time to grind coding, amigo! 🚀🔥
+            </p>
+            <div className="text-center mt-3">
+              <span style={{ fontSize: "3rem" }}>💻☕👨‍💻</span>
+            </div>
+          </>
+        ) : error ? (
           <div className="alert alert-danger" role="alert">
             {error}
           </div>
@@ -49,9 +68,9 @@ const WeatherCard = () => {
           <>
             <h2 className="card-title text-center mb-3">{city}</h2>
 
-            {degreesCelsius !== null && (
+            {tempCelsius !== null && (
               <h3 className="text-center text-primary mb-3">
-                {degreesCelsius.toFixed(1)}°C
+                {tempCelsius.toFixed(1)}°C
               </h3>
             )}
 
