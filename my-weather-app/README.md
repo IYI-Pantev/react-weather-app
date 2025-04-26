@@ -43,6 +43,24 @@ Data comes from **OpenWeather API** and **OpenStreetMap** with dynamic updates.
 
 ---
 
+## 📸 Demo Screenshots
+
+### 🖼️ Initial Page (before search)
+
+> Clean landing view with search bar and beautiful mountain background.
+
+![Initial Page](./src/pictures/demo1.png)
+
+---
+
+### 🖼️ After Search (showing city weather + map)
+
+> Weather details, dynamic weather icon, map preview, and 5-day forecast shown below.
+
+![Weather and Map](./src/pictures/demo2.png)
+
+---
+
 ## 📦 Setup Instructions
 
 1. Clone the repo:
