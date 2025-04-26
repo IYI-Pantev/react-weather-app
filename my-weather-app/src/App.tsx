@@ -15,40 +15,64 @@ function App() {
 
   return (
     <>
-      <div className="min-vh-100 bg-light d-flex flex-column">
+      <div
+        className="min-vh-100 d-flex flex-column"
+        style={{
+          backgroundImage: 'url("/src/pictures/mountain-sky.jpg")',
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
+      >
+        {/* Header stays clean at top */}
         <Header />
 
-        <div className="container py-5 text-center">
-          <h2 className="mb-3">Welcome to the Weather App</h2>
-          <p className="text-muted">
-            Start by entering a city to get the current weather and map!
-          </p>
+        {/* Dim overlay */}
+        <div
+          style={{
+            backgroundColor: "rgba(0, 0, 0, 0.4)", // semi-transparent black
+            flex: 1,
+            paddingTop: "2rem",
+            paddingBottom: "2rem",
+          }}
+        >
+          {/* Content */}
+          <div className="container py-5 text-center text-light">
+            <h2 className="mb-3">Welcome to the Weather App</h2>
+            <p className="text-muted text-light">
+              Start by entering a city to get the current weather and map!
+            </p>
 
-          <div className="d-flex justify-content-center mb-4">
-            <input
-              type="text"
-              className="form-control w-50 me-2 shadow-sm"
-              name="city"
-              placeholder="Enter city or village..."
-              value={city}
-              onChange={(e) => setCity(e.target.value)}
-              style={{ borderColor: "#0d6efd", outline: "none" }}
-            />
-            <button
-              className="btn btn-primary d-flex align-items-center"
-              onClick={handleSearch}
-            >
-              Search&nbsp;🔎
-            </button>
+            <div className="d-flex justify-content-center mb-4">
+              <input
+                type="text"
+                className="form-control w-50 me-2 shadow-sm"
+                name="city"
+                placeholder="Enter city or village..."
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+                style={{
+                  borderColor: "#0d6efd",
+                  outline: "none",
+                  backgroundColor: "rgba(255, 255, 255, 0.9)", // slightly see-through input
+                }}
+              />
+              <button
+                className="btn btn-primary d-flex align-items-center"
+                onClick={handleSearch}
+              >
+                Search&nbsp;🔎
+              </button>
+            </div>
+
+            {/* Show weather card and forecast after search */}
+            {searchedCity && (
+              <>
+                <WeatherCard city={searchedCity} />
+                <Forecast city={searchedCity} />
+              </>
+            )}
           </div>
-
-          {/* Show WeatherCard and Forecast after search */}
-          {searchedCity && (
-            <>
-              <WeatherCard city={searchedCity} />
-              <Forecast city={searchedCity} />
-            </>
-          )}
         </div>
 
         {/* Footer */}
